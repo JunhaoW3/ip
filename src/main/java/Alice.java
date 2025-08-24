@@ -25,7 +25,7 @@ public class Alice {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in); // Initialise scanner
-        ArrayList<String> texts = new ArrayList<>(); // New ArrayList to store texts
+        ArrayList<Task> tasks = new ArrayList<>(); // New ArrayList to store texts
 
         horizontalLine();
         System.out.println("Hello! I'm " + getBotName());
@@ -36,23 +36,50 @@ public class Alice {
         String text = scanner.nextLine();
         String lowerCase = text.toLowerCase();
 
+        // Continues running if input is not "bye"
         while (!lowerCase.equals("bye")) {
 
             // return list of texts when user input "list"
             if (lowerCase.equals("list")) {
 
                 horizontalLine();
-                for (int i = 0; i < texts.size(); i++) {
-                    String item = String.format("%d. %s", i + 1, texts.get(i));
+                System.out.println("Here are the tasks in your list:");
+                for (int i = 0; i < tasks.size(); i++) {
+                    String description = tasks.get(i).getDescription();
+                    String doneStatus = tasks.get(i).getStatusIcon();
+                    String item = String.format("%d. [%s] %s", i + 1, doneStatus, description);
                     System.out.println(item);
                 }
                 horizontalLine();
 
+            } else if (lowerCase.contains("mark") || lowerCase.contains("unmark")) {
+                String result;
+                String[] arr = lowerCase.split(" ");
+                int taskNumber = Integer.parseInt(arr[1]) - 1;
+                String description = tasks.get(taskNumber).getDescription();
+
+                horizontalLine();
+                // check if it is to unmark or mark
+                if (lowerCase.contains("unmark")) {
+                    tasks.get(taskNumber).markUndone();
+                    result = String.format("[ ] %s", description);
+                    System.out.println("OK, I've marked this task as not done yet:");
+                } else {
+                    tasks.get(taskNumber).markDone();
+                    result = String.format("[X] %s", description);
+                    System.out.println("Nice! I've marked this task as done:");
+                }
+                System.out.println(result);
+                horizontalLine();
+
             } else {
-                texts.add(text);
+                Task task = new Task(text);
+                tasks.add(task);
+
                 horizontalLine();
                 System.out.println("added: " + text);
                 horizontalLine();
+
             }
 
             // Take in the next text
