@@ -54,7 +54,7 @@ public class Alice {
                 String result;
                 String[] arr = lowerCase.split(" ");
                 int taskNumber = Integer.parseInt(arr[1]) - 1;
-                String description = tasks.get(taskNumber).getDescription();
+                String description = tasks.get(taskNumber).getDescription().stripTrailing();
 
                 horizontalLine();
                 // check if it is to unmark or mark
