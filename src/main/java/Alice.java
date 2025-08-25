@@ -45,9 +45,7 @@ public class Alice {
                 horizontalLine();
                 System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < tasks.size(); i++) {
-                    String description = tasks.get(i).getDescription();
-                    String doneStatus = tasks.get(i).getStatusIcon();
-                    String item = String.format("%d. [%s] %s", i + 1, doneStatus, description);
+                    String item = String.format("%d. %s", i + 1, tasks.get(i).toString());
                     System.out.println(item);
                 }
                 horizontalLine();
@@ -74,10 +72,30 @@ public class Alice {
 
             } else {
                 Task task = new Task(text);
+                if (lowerCase.contains("todo")) {
+                    task = new Todo(text);
+                } else if (lowerCase.contains("deadline") || lowerCase.contains("event")) {
+                    String[] arr = text.split("/");
+                    String description = arr[0];
+                    if (lowerCase.contains("deadline")) {
+                        // substring to get rid of "by" in text
+                        String by = arr[1].substring(3);
+                        task = new Deadline(description, by);
+                    } else {
+                        // substring to get rid of "from" and "to" in text
+                        String start = arr[1].substring(5);
+                        String end = arr[2].substring(3);
+                        task = new Event(description, start, end);
+                    }
+                }
+
                 tasks.add(task);
 
                 horizontalLine();
-                System.out.println("added: " + text);
+                System.out.println("Got it. I've added this task:");
+                System.out.println(task.toString());
+                String numberOfTasks = String.format("Now you have %d tasks in the list", tasks.size());
+                System.out.println(numberOfTasks);
                 horizontalLine();
 
             }

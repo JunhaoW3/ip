@@ -22,4 +22,15 @@ public class Task {
     public void markUndone() {
         this.isDone = false;
     }
+
+    @Override
+    public String toString() {
+        String doneBox;
+        if (this.isDone) {
+            doneBox = "[X]";
+        } else {
+            doneBox = "[ ]";
+        }
+        return String.format("%s %s", doneBox, this.getDescription());
+    }
 }
