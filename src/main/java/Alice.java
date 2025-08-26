@@ -18,9 +18,27 @@ public class Alice {
         System.out.println("-");
     }
 
+    // Greeting the chat
+    public static void greet() {
+        horizontalLine();
+        System.out.println("Hello! I'm " + getBotName());
+        System.out.println("What can I do for you?");
+        horizontalLine();
+    }
+
     // Exiting the chat
     public static void exit() {
         System.out.println("Bye. Hope to see you again soon!");
+        horizontalLine();
+    }
+
+    public static void getList() {
+        horizontalLine();
+        System.out.println("Here are the tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            String item = String.format("%d. %s", i + 1, tasks.get(i).toString());
+            System.out.println(item);
+        }
         horizontalLine();
     }
 
@@ -58,12 +76,9 @@ public class Alice {
 
     public static void main(String[] args) throws AliceException {
         Scanner scanner = new Scanner(System.in); // Initialise scanner
-        //ArrayList<Task> tasks = new ArrayList<>(); // New ArrayList to store texts
 
-        horizontalLine();
-        System.out.println("Hello! I'm " + getBotName());
-        System.out.println("What can I do for you?");
-        horizontalLine();
+        // initial greeting from AliceBot
+        greet();
 
         //Using lower case so that it accepts different iterations of "bye"
         String text = scanner.nextLine();
@@ -75,33 +90,19 @@ public class Alice {
                 // return list of texts when user input "list"
                 if (lowerCase.equals("list")) {
 
-                    horizontalLine();
-                    System.out.println("Here are the tasks in your list:");
-                    for (int i = 0; i < tasks.size(); i++) {
-                        String item = String.format("%d. %s", i + 1, tasks.get(i).toString());
-                        System.out.println(item);
-                    }
-                    horizontalLine();
+                    getList();
 
                 } else if (lowerCase.startsWith("mark") || lowerCase.startsWith("unmark")) {
-                    String result;
                     int taskNumber = getTaskNumber(lowerCase);
                     Task task = tasks.get(taskNumber);
-
-                    String description = tasks.get(taskNumber).getDescription().stripTrailing();
 
                     horizontalLine();
                     // check if it is to unmark or mark
                     if (lowerCase.contains("unmark")) {
                         task.markUndone();
-                        result = String.format("[ ] %s", description);
-                        System.out.println("OK, I've marked this task as not done yet:");
                     } else {
                         task.markDone();
-                        result = String.format("[X] %s", description);
-                        System.out.println("Nice! I've marked this task as done:");
                     }
-                    System.out.println(result);
                     horizontalLine();
 
                 } else if (lowerCase.startsWith("todo") || lowerCase.startsWith("deadline") || lowerCase.startsWith("event")) {
