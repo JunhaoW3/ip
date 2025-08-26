@@ -44,6 +44,18 @@ public class Alice {
         return taskNumber;
     }
 
+    public static void deleteTask(String text) throws AliceException {
+        int taskNumber = getTaskNumber(text);
+        Task task = tasks.get(taskNumber);
+        tasks.remove(taskNumber);
+
+        horizontalLine();
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(task.toString());
+        System.out.println("Now you have 4 tasks in the list.");
+        horizontalLine();
+    }
+
     public static void main(String[] args) throws AliceException {
         Scanner scanner = new Scanner(System.in); // Initialise scanner
         //ArrayList<Task> tasks = new ArrayList<>(); // New ArrayList to store texts
@@ -130,6 +142,8 @@ public class Alice {
                     System.out.println(numberOfTasks);
                     horizontalLine();
 
+                } else if (lowerCase.startsWith("delete")) {
+                    deleteTask(text);
                 } else {
                     throw new UnknownCommandException();
                 }
