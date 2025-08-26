@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 public class Alice {
     public static String botName = "Alice";
+    public static ArrayList<Task> tasks = new ArrayList<>();
 
     // Getter for name
     public static String getBotName() {
@@ -23,9 +24,29 @@ public class Alice {
         horizontalLine();
     }
 
+    public static int getTaskNumber(String text) throws AliceException {
+        String[] arr = text.split(" ");
+        if (arr.length < 2) {
+            throw new InvalidTaskNumberException();
+        }
+
+        int taskNumber;
+        try {
+            taskNumber = Integer.parseInt(arr[1]) - 1;
+        } catch (NumberFormatException e) {
+            throw new InvalidTaskNumberException();
+        }
+
+        if (taskNumber < 0 || taskNumber >= tasks.size()) {
+            throw new InvalidTaskNumberException();
+        }
+
+        return taskNumber;
+    }
+
     public static void main(String[] args) throws AliceException {
         Scanner scanner = new Scanner(System.in); // Initialise scanner
-        ArrayList<Task> tasks = new ArrayList<>(); // New ArrayList to store texts
+        //ArrayList<Task> tasks = new ArrayList<>(); // New ArrayList to store texts
 
         horizontalLine();
         System.out.println("Hello! I'm " + getBotName());
@@ -50,34 +71,21 @@ public class Alice {
                     }
                     horizontalLine();
 
-                } else if (lowerCase.contains("mark") || lowerCase.contains("unmark")) {
+                } else if (lowerCase.startsWith("mark") || lowerCase.startsWith("unmark")) {
                     String result;
-                    String[] arr = lowerCase.split(" ");
-                    if (arr.length < 2) {
-                        throw new InvalidTaskNumberException();
-                    }
-
-                    int taskNumber;
-                    try {
-                        taskNumber = Integer.parseInt(arr[1]) - 1;
-                    } catch (NumberFormatException e) {
-                        throw new InvalidTaskNumberException();
-                    }
-
-                    if (taskNumber < 0 || taskNumber >= tasks.size()) {
-                        throw new InvalidTaskNumberException();
-                    }
+                    int taskNumber = getTaskNumber(lowerCase);
+                    Task task = tasks.get(taskNumber);
 
                     String description = tasks.get(taskNumber).getDescription().stripTrailing();
 
                     horizontalLine();
                     // check if it is to unmark or mark
                     if (lowerCase.contains("unmark")) {
-                        tasks.get(taskNumber).markUndone();
+                        task.markUndone();
                         result = String.format("[ ] %s", description);
                         System.out.println("OK, I've marked this task as not done yet:");
                     } else {
-                        tasks.get(taskNumber).markDone();
+                        task.markDone();
                         result = String.format("[X] %s", description);
                         System.out.println("Nice! I've marked this task as done:");
                     }
