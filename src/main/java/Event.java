@@ -1,24 +1,24 @@
 public class Event extends Task {
 
-    protected String start;
-    protected String end;
+    protected String at;
 
-    public Event(String description, String start, String end) {
+    public Event(String description, String at) {
         super(description);
-        this.start = start;
-        this.end = end;
+        this.at = at;
     }
 
-    public String getStartTime() {
-        return this.start;
+    public Event(String description, boolean isDone, String at) {
+        super(description, isDone);
+        this.at = at;
     }
 
-    public String getEndTime() {
-        return this.end;
+    @Override
+    public String toFileFormat() {
+        return "E | " + getStatusIcon() + " | " + description + " | " + at;
     }
 
     @Override
     public String toString() {
-        return String.format("[E]%s (from: %s to: %s)", super.toString(), this.getStartTime(), this.getEndTime());
+        return "[E][" + (isDone ? "X" : " ") + "] " + description + " (at: " + at + ")";
     }
 }
