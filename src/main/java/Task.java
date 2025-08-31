@@ -7,6 +7,11 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
     public String getDescription() {
         return this.description;
     }
@@ -29,14 +34,12 @@ public class Task {
         System.out.println(String.format("[ ] %s", description));
     }
 
+    public String toFileFormat() {
+        return (isDone ? "X" : " ") + " | " + description;
+    }
+
     @Override
     public String toString() {
-        String doneBox;
-        if (this.isDone) {
-            doneBox = "[X]";
-        } else {
-            doneBox = "[ ]";
-        }
-        return String.format("%s %s", doneBox, this.getDescription());
+        return String.format("%s %s", getStatusIcon(), this.getDescription());
     }
 }

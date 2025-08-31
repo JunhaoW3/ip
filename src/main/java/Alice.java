@@ -1,7 +1,9 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.nio.file.Path;
 
 public class Alice {
+    private static Storage storage;
     public static String botName = "Alice";
     public static ArrayList<Task> tasks = new ArrayList<>();
 
@@ -70,12 +72,16 @@ public class Alice {
         horizontalLine();
         System.out.println("Noted. I've removed this task:");
         System.out.println(task.toString());
-        System.out.println("Now you have 4 tasks in the list.");
+        String tasksLeft = String.format("Now you have %s tasks in the list.", tasks.size());
+        System.out.println(tasksLeft);
         horizontalLine();
     }
 
     public static void main(String[] args) throws AliceException {
-        Scanner scanner = new Scanner(System.in); // Initialise scanner
+        Scanner scanner = new Scanner(System.in);// Initialise scanner
+        String filePath = Path.of("data", "alice.txt").toString();
+        storage = new Storage(filePath);
+        tasks = storage.load();
 
         // initial greeting from AliceBot
         greet();
@@ -128,9 +134,10 @@ public class Alice {
                                 throw new AliceException("Event format should be: event <description> /from <start> to <end>");
                             }
                             // substring to get rid of "from" and "to" in text
-                            String start = arr[1].substring(5);
-                            String end = arr[2].substring(3);
-                            task = new Event(description, start, end);
+                            String start = arr[1].substring(5).stripTrailing();
+                            String end = arr[2].substring(3).stripTrailing();
+                            String at = start + "-" + end;
+                            task = new Event(description, at);
                         }
                     }
 
@@ -160,6 +167,7 @@ public class Alice {
             lowerCase = text.toLowerCase();
         }
 
+        storage.save(tasks);
         horizontalLine();
         exit();
     }
