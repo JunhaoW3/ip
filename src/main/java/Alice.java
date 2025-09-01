@@ -1,48 +1,22 @@
 import java.util.Scanner;
-import java.util.ArrayList;
 import java.nio.file.Path;
 
 public class Alice {
-    private static Storage storage;
-    private static TaskList tasks;
-    public static String botName = "Alice";
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
-    // Getter for name
-    public static String getBotName() {
-        return botName;
-    }
-
-    // Printing horizontal lines
-    public static void horizontalLine() {
-        for (int i = 0; i < 30; i++) {
-            System.out.print("-");
-        }
-        System.out.println("-");
-    }
-
-    // Greeting the chat
-    public static void greet() {
-        horizontalLine();
-        System.out.println("Hello! I'm " + getBotName());
-        System.out.println("What can I do for you?");
-        horizontalLine();
-    }
-
-    // Exiting the chat
-    public static void exit() {
-        System.out.println("Bye. Hope to see you again soon!");
-        horizontalLine();
-    }
-
-    public static void main(String[] args) throws AliceException {
-        Scanner scanner = new Scanner(System.in);// Initialise scanner
-        String filePath = Path.of("data", "alice.txt").toString();
+    public Alice(String filePath) {
+        ui = new Ui();
         storage = new Storage(filePath);
-        tasks = new TaskList();
         tasks = storage.load();
+    }
+
+    public void run() {
+        Scanner scanner = new Scanner(System.in);// Initialise scanner
 
         // initial greeting from AliceBot
-        greet();
+        ui.greet();
 
         //Using lower case so that it accepts different iterations of "bye"
         String text = scanner.nextLine();
@@ -54,22 +28,22 @@ public class Alice {
                 // return list of texts when user input "list"
                 if (lowerCase.equals("list")) {
 
-                    horizontalLine();
+                    ui.horizontalLine();
                     tasks.getList();
-                    horizontalLine();
+                    ui.horizontalLine();
 
                 } else if (lowerCase.startsWith("mark") || lowerCase.startsWith("unmark")) {
                     int taskNumber = tasks.getTaskNumber(lowerCase);
                     Task task = tasks.get(taskNumber);
 
-                    horizontalLine();
+                    ui.horizontalLine();
                     // check if it is to unmark or mark
                     if (lowerCase.contains("unmark")) {
                         task.markUndone();
                     } else {
                         task.markDone();
                     }
-                    horizontalLine();
+                    ui.horizontalLine();
 
                 } else if (lowerCase.startsWith("todo") || lowerCase.startsWith("deadline") || lowerCase.startsWith("event")) {
                     // Printing the tasks
@@ -101,25 +75,25 @@ public class Alice {
 
                     tasks.add(task);
 
-                    horizontalLine();
+                    ui.horizontalLine();
                     System.out.println("Got it. I've added this task:");
                     System.out.println(task.toString());
                     String numberOfTasks = String.format("Now you have %d tasks in the list", tasks.getSize());
                     System.out.println(numberOfTasks);
-                    horizontalLine();
+                    ui.horizontalLine();
 
                 } else if (lowerCase.startsWith("delete")) {
-                    horizontalLine();
+                    ui.horizontalLine();
                     tasks.deleteTask(text);
-                    horizontalLine();
+                    ui.horizontalLine();
                 } else {
                     throw new UnknownCommandException();
                 }
 
             } catch (AliceException e) {
-                horizontalLine();
+                ui.horizontalLine();
                 System.out.println(e.getMessage());
-                horizontalLine();
+                ui.horizontalLine();
             }
 
             // Take in the next text
@@ -128,7 +102,12 @@ public class Alice {
         }
 
         storage.save(tasks);
-        horizontalLine();
-        exit();
+        ui.horizontalLine();
+        ui.exit();
+    }
+
+    public static void main(String[] args) throws AliceException {
+        String filePath = Path.of("data", "alice.txt").toString();
+        new Alice(filePath).run();
     }
 }

@@ -27,7 +27,7 @@ public class TaskList {
         return tasks;
     }
 
-    public static void getList() {
+    public void getList() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
             String item = String.format("%d. %s", i + 1, tasks.get(i).toString());
@@ -35,7 +35,7 @@ public class TaskList {
         }
     }
 
-    public static int getTaskNumber(String text) throws AliceException {
+    public int getTaskNumber(String text) throws AliceException {
         String[] arr = text.split(" ");
         if (arr.length < 2) {
             throw new InvalidTaskNumberException();
@@ -55,7 +55,7 @@ public class TaskList {
         return taskNumber;
     }
 
-    public static void deleteTask(String text) throws AliceException {
+    public void deleteTask(String text) throws AliceException {
         int taskNumber = getTaskNumber(text);
         Task task = tasks.get(taskNumber);
         tasks.remove(taskNumber);
