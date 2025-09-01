@@ -76,10 +76,7 @@ public class Alice {
                     tasks.add(task);
 
                     ui.horizontalLine();
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println(task.toString());
-                    String numberOfTasks = String.format("Now you have %d tasks in the list", tasks.getSize());
-                    System.out.println(numberOfTasks);
+                    tasks.addTask(task);
                     ui.horizontalLine();
 
                 } else if (lowerCase.startsWith("delete")) {
@@ -106,7 +103,7 @@ public class Alice {
         ui.exit();
     }
 
-    public static void main(String[] args) throws AliceException {
+    public static void main(String[] args) {
         String filePath = Path.of("data", "alice.txt").toString();
         new Alice(filePath).run();
     }

@@ -55,6 +55,13 @@ public class TaskList {
         return taskNumber;
     }
 
+    public void addTask(Task task) {
+        System.out.println("Got it. I've added this task:");
+        System.out.println(task.toString());
+        String numberOfTasks = String.format("Now you have %d tasks in the list", tasks.size());
+        System.out.println(numberOfTasks);
+    }
+
     public void deleteTask(String text) throws AliceException {
         int taskNumber = getTaskNumber(text);
         Task task = tasks.get(taskNumber);
