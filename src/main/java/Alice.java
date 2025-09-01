@@ -126,18 +126,16 @@ public class Alice {
                             if (arr.length < 2 || !arr[1].startsWith("by ")) {
                                 throw new AliceException("Deadline format should be: deadline <description> /by <time>");
                             }
-                            // substring to get rid of "by" in text
-                            String by = arr[1].substring(3);
+                            String by = String.format("%s/%s/%s", arr[1].substring(3), arr[2], arr[3].trim());
                             task = new Deadline(description, by);
                         } else {
-                            if (arr.length < 3 || !arr[1].startsWith("from ") || !arr[2].startsWith("to ")) {
+                            if (arr.length < 3 || !arr[1].startsWith("from ") || !arr[4].startsWith("to ")) {
                                 throw new AliceException("Event format should be: event <description> /from <start> to <end>");
                             }
-                            // substring to get rid of "from" and "to" in text
-                            String start = arr[1].substring(5).stripTrailing();
-                            String end = arr[2].substring(3).stripTrailing();
-                            String at = start + "-" + end;
-                            task = new Event(description, at);
+                            String start = String.format("%s/%s/%s", arr[1].substring(5), arr[2], arr[3].trim());
+                            String end = String.format("%s/%s/%s", arr[4].substring(3), arr[5], arr[6].trim());
+                            //String at = start + "-" + end;
+                            task = new Event(description, start, end);
                         }
                     }
 
