@@ -5,4 +5,9 @@ public class ExitCommand extends Command {
         ui.horizontalLine();
         ui.exit();
     }
+
+    @Override
+    public boolean isExit() {
+        return true;
+    }
 }
