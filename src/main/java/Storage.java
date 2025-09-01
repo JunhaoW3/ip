@@ -64,7 +64,7 @@ public class Storage {
             case "D":
                 return new Deadline(description, isDone, parts[3]);
             case "E":
-                return new Event(description, isDone, parts[3]);
+                return new Event(description, isDone, parts[3], parts[4]);
             default:
                 throw new IllegalArgumentException("Unknown task type: " + type);
         }
