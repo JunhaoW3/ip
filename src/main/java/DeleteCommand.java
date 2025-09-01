@@ -11,4 +11,5 @@ public class DeleteCommand extends Command {
         tasks.deleteTask(input);
         ui.horizontalLine();
     }
+
 }

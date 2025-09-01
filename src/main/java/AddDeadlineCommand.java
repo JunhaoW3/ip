@@ -19,6 +19,7 @@ public class AddDeadlineCommand extends Command {
 
         ui.horizontalLine();
         tasks.add(deadline);
+        tasks.printAdd(deadline);
         ui.horizontalLine();
 
         storage.save(tasks);

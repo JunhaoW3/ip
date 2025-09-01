@@ -20,6 +20,7 @@ public class AddEventCommand extends Command {
 
         ui.horizontalLine();
         tasks.add(event);
+        tasks.printAdd(event);
         ui.horizontalLine();
 
         storage.save(tasks);

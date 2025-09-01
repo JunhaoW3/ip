@@ -11,6 +11,7 @@ public class AddTodoCommand extends Command {
 
         ui.horizontalLine();
         tasks.add(todo);
+        tasks.printAdd(todo);
         ui.horizontalLine();
 
         storage.save(tasks);
