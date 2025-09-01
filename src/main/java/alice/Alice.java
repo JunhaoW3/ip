@@ -1,3 +1,8 @@
+package alice;
+
+import alice.command.Command;
+import alice.exceptions.AliceException;
+
 import java.util.Scanner;
 import java.nio.file.Path;
 

@@ -1,3 +1,5 @@
+package alice.exceptions;
+
 public class EmptyDescriptionException extends AliceException {
 
     public EmptyDescriptionException(String taskType) {

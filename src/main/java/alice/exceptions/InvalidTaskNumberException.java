@@ -1,3 +1,5 @@
+package alice.exceptions;
+
 public class InvalidTaskNumberException extends AliceException {
 
     public InvalidTaskNumberException() {

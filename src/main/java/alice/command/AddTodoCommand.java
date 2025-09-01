@@ -1,3 +1,12 @@
+package alice.command;
+
+import alice.Storage;
+import alice.Task;
+import alice.TaskList;
+import alice.Ui;
+import alice.exceptions.AliceException;
+import alice.task.Todo;
+
 public class AddTodoCommand extends Command {
     private final String input;
 

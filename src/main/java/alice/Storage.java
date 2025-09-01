@@ -1,3 +1,9 @@
+package alice;
+
+import alice.task.Deadline;
+import alice.task.Event;
+import alice.task.Todo;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

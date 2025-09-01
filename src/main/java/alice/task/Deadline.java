@@ -1,5 +1,12 @@
+package alice.task;
+
+import alice.Task;
+import alice.exceptions.AliceException;
+import alice.exceptions.InvalidTaskNumberException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class Deadline extends Task {
 
@@ -31,4 +38,5 @@ public class Deadline extends Task {
     public String toString() {
         return "[D][" + (isDone ? "X" : " ") + "] " + description + " (by: " + by.format(OUTPUT_FORMAT) + ")";
     }
+
 }

@@ -1,3 +1,10 @@
+package alice.command;
+
+import alice.Storage;
+import alice.TaskList;
+import alice.Ui;
+import alice.exceptions.AliceException;
+
 public class DeleteCommand extends Command {
     private final String input;
 

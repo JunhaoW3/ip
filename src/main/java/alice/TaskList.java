@@ -1,3 +1,8 @@
+package alice;
+
+import alice.exceptions.AliceException;
+import alice.exceptions.InvalidTaskNumberException;
+
 import java.util.ArrayList;
 
 public class TaskList {

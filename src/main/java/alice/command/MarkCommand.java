@@ -1,3 +1,11 @@
+package alice.command;
+
+import alice.Storage;
+import alice.Task;
+import alice.TaskList;
+import alice.Ui;
+import alice.exceptions.AliceException;
+
 public class MarkCommand extends Command {
     private final String input;
     private final boolean isMark;

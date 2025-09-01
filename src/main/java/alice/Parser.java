@@ -1,3 +1,10 @@
+package alice;
+
+import alice.command.*;
+import alice.exceptions.AliceException;
+import alice.exceptions.EmptyDescriptionException;
+import alice.exceptions.UnknownCommandException;
+
 public class Parser {
 
     public static Command parse(String fullCommand) throws AliceException {
