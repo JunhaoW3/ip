@@ -12,8 +12,8 @@ public class Storage {
     }
 
     // Load tasks from file, returns empty list if file does not exist
-    public ArrayList<Task> load() {
-        ArrayList<Task> tasks = new ArrayList<>();
+    public TaskList load() {
+        TaskList tasks = new TaskList();
         File file = new File(filePath);
 
         try {
@@ -40,10 +40,10 @@ public class Storage {
     }
 
     // Saves tasks to file
-    public void save(ArrayList<Task> tasks) {
+    public void save(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(filePath);
-            for (Task task : tasks) {
+            for (Task task : tasks.getAllTasks()) {
                 fw.write(task.toFileFormat() + System.lineSeparator());
             }
             fw.close();

@@ -4,8 +4,8 @@ import java.nio.file.Path;
 
 public class Alice {
     private static Storage storage;
+    private static TaskList tasks;
     public static String botName = "Alice";
-    public static ArrayList<Task> tasks = new ArrayList<>();
 
     // Getter for name
     public static String getBotName() {
@@ -34,53 +34,11 @@ public class Alice {
         horizontalLine();
     }
 
-    public static void getList() {
-        horizontalLine();
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < tasks.size(); i++) {
-            String item = String.format("%d. %s", i + 1, tasks.get(i).toString());
-            System.out.println(item);
-        }
-        horizontalLine();
-    }
-
-    public static int getTaskNumber(String text) throws AliceException {
-        String[] arr = text.split(" ");
-        if (arr.length < 2) {
-            throw new InvalidTaskNumberException();
-        }
-
-        int taskNumber;
-        try {
-            taskNumber = Integer.parseInt(arr[1]) - 1;
-        } catch (NumberFormatException e) {
-            throw new InvalidTaskNumberException();
-        }
-
-        if (taskNumber < 0 || taskNumber >= tasks.size()) {
-            throw new InvalidTaskNumberException();
-        }
-
-        return taskNumber;
-    }
-
-    public static void deleteTask(String text) throws AliceException {
-        int taskNumber = getTaskNumber(text);
-        Task task = tasks.get(taskNumber);
-        tasks.remove(taskNumber);
-
-        horizontalLine();
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(task.toString());
-        String tasksLeft = String.format("Now you have %s tasks in the list.", tasks.size());
-        System.out.println(tasksLeft);
-        horizontalLine();
-    }
-
     public static void main(String[] args) throws AliceException {
         Scanner scanner = new Scanner(System.in);// Initialise scanner
         String filePath = Path.of("data", "alice.txt").toString();
         storage = new Storage(filePath);
+        tasks = new TaskList();
         tasks = storage.load();
 
         // initial greeting from AliceBot
@@ -96,10 +54,12 @@ public class Alice {
                 // return list of texts when user input "list"
                 if (lowerCase.equals("list")) {
 
-                    getList();
+                    horizontalLine();
+                    tasks.getList();
+                    horizontalLine();
 
                 } else if (lowerCase.startsWith("mark") || lowerCase.startsWith("unmark")) {
-                    int taskNumber = getTaskNumber(lowerCase);
+                    int taskNumber = tasks.getTaskNumber(lowerCase);
                     Task task = tasks.get(taskNumber);
 
                     horizontalLine();
@@ -144,12 +104,14 @@ public class Alice {
                     horizontalLine();
                     System.out.println("Got it. I've added this task:");
                     System.out.println(task.toString());
-                    String numberOfTasks = String.format("Now you have %d tasks in the list", tasks.size());
+                    String numberOfTasks = String.format("Now you have %d tasks in the list", tasks.getSize());
                     System.out.println(numberOfTasks);
                     horizontalLine();
 
                 } else if (lowerCase.startsWith("delete")) {
-                    deleteTask(text);
+                    horizontalLine();
+                    tasks.deleteTask(text);
+                    horizontalLine();
                 } else {
                     throw new UnknownCommandException();
                 }

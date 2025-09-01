@@ -1,3 +1,3 @@
 T |   | todo homework
 D |   | deadline return book  | 2/12/2019 1800
-E | X | event project meeting  | 6/10/2019 1900 | 6/10/2019 2000
+T |   | todo pilates
