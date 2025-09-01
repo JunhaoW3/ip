@@ -76,7 +76,7 @@ public class Alice {
                     tasks.add(task);
 
                     ui.horizontalLine();
-                    tasks.addTask(task);
+                    tasks.add(task);
                     ui.horizontalLine();
 
                 } else if (lowerCase.startsWith("delete")) {

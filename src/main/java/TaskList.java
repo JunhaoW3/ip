@@ -13,6 +13,10 @@ public class TaskList {
 
     public void add(Task task) {
         tasks.add(task);
+        System.out.println("Got it. I've added this task:");
+        System.out.println(task.toString());
+        String numberOfTasks = String.format("Now you have %d tasks in the list", tasks.size());
+        System.out.println(numberOfTasks);
     }
 
     public Task get(int index) {
@@ -53,13 +57,6 @@ public class TaskList {
         }
 
         return taskNumber;
-    }
-
-    public void addTask(Task task) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task.toString());
-        String numberOfTasks = String.format("Now you have %d tasks in the list", tasks.size());
-        System.out.println(numberOfTasks);
     }
 
     public void deleteTask(String text) throws AliceException {
