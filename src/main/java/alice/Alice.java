@@ -17,6 +17,9 @@ public class Alice {
         tasks = storage.load();
     }
 
+    /**
+     * Runs the Alice program
+     */
     public void run() {
         Scanner scanner = new Scanner(System.in);// Initialise scanner
 

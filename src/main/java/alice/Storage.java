@@ -9,6 +9,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Represents a storage for tasks.
+ */
 public class Storage {
     private final String filePath;
 
@@ -16,7 +19,12 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    // Load tasks from file, returns empty list if file does not exist
+    /**
+     * Returns the task list recorded in a file.
+     * If there is nothing in the list, an empty list will be returned
+     *
+     * @return Task list
+     */
     public TaskList load() {
         TaskList tasks = new TaskList();
         File file = new File(filePath);
@@ -44,7 +52,11 @@ public class Storage {
         return tasks;
     }
 
-    // Saves tasks to file
+    /**
+     * Saves the current file that has been written to by the user's input
+     *
+     * @param tasks Tasks in the file
+     */
     public void save(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(filePath);
@@ -57,6 +69,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns task type after parsing the string command
+     *
+     * @param line Line input from the user
+     * @return Task type
+     */
     private Task parseTask(String line) {
         String[] parts = line.split(" \\| ");
         String type = parts[0];
