@@ -32,9 +32,9 @@ public class Alice {
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (AliceException e) {
-                ui.horizontalLine();
+                ui.printHorizontalLine();
                 System.out.println(e.getMessage());
-                ui.horizontalLine();
+                ui.printHorizontalLine();
             }
         }
     }

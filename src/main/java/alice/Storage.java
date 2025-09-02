@@ -10,16 +10,16 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Storage {
-    private final String filePath;
+    private final String FILEPATH;
 
     public Storage(String filePath) {
-        this.filePath = filePath;
+        this.FILEPATH = filePath;
     }
 
     // Load tasks from file, returns empty list if file does not exist
     public TaskList load() {
         TaskList tasks = new TaskList();
-        File file = new File(filePath);
+        File file = new File(FILEPATH);
 
         try {
             if (!file.exists()) {
@@ -32,7 +32,7 @@ public class Storage {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 try {
-                    tasks.add(parseTask(line));
+                    tasks.addTask(parseTask(line));
                 } catch (Exception e) {
                     System.out.println("Skipping corrupted line: " + line);
                 }
@@ -47,7 +47,7 @@ public class Storage {
     // Saves tasks to file
     public void save(TaskList tasks) {
         try {
-            FileWriter fw = new FileWriter(filePath);
+            FileWriter fw = new FileWriter(FILEPATH);
             for (Task task : tasks.getAllTasks()) {
                 fw.write(task.toFileFormat() + System.lineSeparator());
             }

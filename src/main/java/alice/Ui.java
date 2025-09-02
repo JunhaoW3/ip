@@ -7,7 +7,7 @@ public class Ui {
         return BOT_NAME;
     }
 
-    public void horizontalLine() {
+    public void printHorizontalLine() {
         for (int i = 0; i < 30; i++) {
             System.out.print("-");
         }
@@ -15,14 +15,14 @@ public class Ui {
     }
 
     public void greet() {
-        horizontalLine();
+        printHorizontalLine();
         System.out.println("Hello! I'm " + getBotName());
         System.out.println("What can I do for you?");
-        horizontalLine();
+        printHorizontalLine();
     }
 
     public void exit() {
         System.out.println("Bye. Hope to see you again soon!");
-        horizontalLine();
+        printHorizontalLine();
     }
 }

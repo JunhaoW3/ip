@@ -18,14 +18,14 @@ public class MarkCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws AliceException {
         int taskNumber = tasks.getTaskNumber(input);
-        Task task = tasks.get(taskNumber);
+        Task task = tasks.getTask(taskNumber);
 
-        ui.horizontalLine();
+        ui.printHorizontalLine();
         if (isMark) {
             task.markDone();
         } else {
             task.markUndone();
         }
-        ui.horizontalLine();
+        ui.printHorizontalLine();
     }
 }

@@ -16,11 +16,11 @@ public class TaskList {
         this.tasks = tasks;
     }
 
-    public void add(Task task) {
+    public void addTask(Task task) {
         tasks.add(task);
     }
 
-    public Task get(int index) {
+    public Task getTask(int index) {
         return tasks.get(index);
     }
 
