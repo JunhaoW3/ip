@@ -7,8 +7,8 @@ import alice.Ui;
 public class ListCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.horizontalLine();
+        ui.printHorizontalLine();
         tasks.getList();
-        ui.horizontalLine();
+        ui.printHorizontalLine();
     }
 }

@@ -18,10 +18,10 @@ public class AddTodoCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws AliceException {
         Task todo = new Todo(input);
 
-        ui.horizontalLine();
-        tasks.add(todo);
+        ui.printHorizontalLine();
+        tasks.addTask(todo);
         tasks.printAdd(todo);
-        ui.horizontalLine();
+        ui.printHorizontalLine();
 
         storage.save(tasks);
     }

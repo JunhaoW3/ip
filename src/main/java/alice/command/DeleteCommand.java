@@ -14,9 +14,9 @@ public class DeleteCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws AliceException {
-        ui.horizontalLine();
+        ui.printHorizontalLine();
         tasks.deleteTask(input);
-        ui.horizontalLine();
+        ui.printHorizontalLine();
     }
 
 }

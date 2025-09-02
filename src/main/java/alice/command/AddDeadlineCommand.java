@@ -21,15 +21,15 @@ public class AddDeadlineCommand extends Command {
         String description = arr[0];
 
         if (arr.length < 2 || !arr[1].startsWith("by ")) {
-            throw new AliceException("alice.task.Deadline format should be: deadline <description> /by <time>");
+            throw new AliceException("Deadline format should be: deadline <description> /by <time>");
         }
         String by = String.format("%s/%s/%s", arr[1].substring(3), arr[2], arr[3].trim());
         Task deadline = new Deadline(description, by);
 
-        ui.horizontalLine();
-        tasks.add(deadline);
+        ui.printHorizontalLine();
+        tasks.addTask(deadline);
         tasks.printAdd(deadline);
-        ui.horizontalLine();
+        ui.printHorizontalLine();
 
         storage.save(tasks);
     }
