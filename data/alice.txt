@@ -1,1 +1,3 @@
-T | X | todo homework
+T |   | todo homework
+D | X | deadline return book  | 2/10/2018 1800
+E |   | event return ceremony  | 2/10/2018 1700 | 2/10/2018 1900
