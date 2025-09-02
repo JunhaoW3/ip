@@ -5,6 +5,9 @@ import alice.exceptions.InvalidTaskNumberException;
 
 import java.util.ArrayList;
 
+/**
+ * Keeps track of the tasks in the list
+ */
 public class TaskList {
     private static ArrayList<Task> tasks = new ArrayList<>();
 
@@ -16,22 +19,45 @@ public class TaskList {
         this.tasks = tasks;
     }
 
+    /**
+     * Adds task to the list
+     *
+     * @param task Task to be added to the list
+     */
     public void add(Task task) {
         tasks.add(task);
     }
 
+    /**
+     * Returns the task of a list from a particular index
+     * If the index is out of bounds, an error will be thrown
+     *
+     * @param index Index of the task in the list
+     * @return Task at the given index
+     */
     public Task get(int index) {
         return tasks.get(index);
     }
 
+    /**
+     *
+     * @return Size of the list
+     */
     public int getSize() {
         return tasks.size();
     }
 
+    /**
+     *
+     * @return list of all the tasks
+     */
     public ArrayList<Task> getAllTasks() {
         return tasks;
     }
 
+    /**
+     * Prints out the tasks in the list
+     */
     public void getList() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
@@ -40,6 +66,12 @@ public class TaskList {
         }
     }
 
+    /**
+     *
+     * @param text Text for the task to be found
+     * @return Index of the task in the list
+     * @throws AliceException If task number is invalid (e.g. out of bounds)
+     */
     public int getTaskNumber(String text) throws AliceException {
         String[] arr = text.split(" ");
         if (arr.length < 2) {
@@ -60,6 +92,12 @@ public class TaskList {
         return taskNumber;
     }
 
+    /**
+     * Prints the output to show that task is added to the list,
+     * as well as the current number of tasks in the list
+     *
+     * @param task Task to be added to the list
+     */
     public void printAdd(Task task) {
         System.out.println("Got it. I've added this task:");
         System.out.println(task.toString());
@@ -67,6 +105,12 @@ public class TaskList {
         System.out.println(numberOfTasks);
     }
 
+    /**
+     * Deletes the task with matching text string
+     *
+     * @param text Text of task to be deleted
+     * @throws AliceException If there is no matching task
+     */
     public void deleteTask(String text) throws AliceException {
         int taskNumber = getTaskNumber(text);
         Task task = tasks.get(taskNumber);

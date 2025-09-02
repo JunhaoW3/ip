@@ -5,8 +5,19 @@ import alice.exceptions.AliceException;
 import alice.exceptions.EmptyDescriptionException;
 import alice.exceptions.UnknownCommandException;
 
+/**
+ * Represents an object that parses the commands of users,
+ * and returns an appropriate command
+ */
 public class Parser {
 
+    /**
+     * Returns an appropriate command using the user's input
+     *
+     * @param fullCommand full input of the user
+     * @return Command
+     * @throws AliceException If an unknown command is given
+     */
     public static Command parse(String fullCommand) throws AliceException {
         String lower = fullCommand.trim().toLowerCase();
 
