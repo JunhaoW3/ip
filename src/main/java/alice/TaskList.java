@@ -77,4 +77,19 @@ public class TaskList {
         String tasksLeft = String.format("Now you have %s tasks in the list.", tasks.size());
         System.out.println(tasksLeft);
     }
+
+    public void findTask(String text) {
+        int count = 0;
+        String[] words = text.split(" ");
+        String keyword = words[1];
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            String taskString = tasks.get(i).toString();
+            if (taskString.contains(keyword)) {
+                String item = String.format("%d. %s", count + 1, taskString);
+                System.out.println(item);
+                count++;
+            }
+        }
+    }
 }

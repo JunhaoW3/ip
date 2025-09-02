@@ -19,7 +19,7 @@ public class AddEventCommand extends Command {
         String[] arr = input.split("/");
         String description = arr[0];
 
-        if (arr.length < 3 || !arr[1].startsWith("from ") || !arr[4].startsWith("to ")) {
+        if (arr.length < 6 || !arr[1].startsWith("from ") || !arr[4].startsWith("to ")) {
             throw new AliceException("alice.task.Event format should be: event <description> /from <start> to <end>");
         }
         String start = String.format("%s/%s/%s", arr[1].substring(5), arr[2], arr[3].trim());
