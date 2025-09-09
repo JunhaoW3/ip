@@ -12,10 +12,8 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printHorizontalLine();
-        tasks.findTask(input);
-        ui.printHorizontalLine();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return tasks.findTask(input);
     }
 
 }

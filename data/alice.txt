@@ -1,3 +1,3 @@
-T |   | todo homework
+T | X | todo homework
 D |   | deadline return book  | 2/10/2018 1800
 T |   | todo sports

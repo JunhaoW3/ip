@@ -15,14 +15,13 @@ public class AddTodoCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws AliceException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws AliceException {
         Task todo = new Todo(input);
 
-        ui.printHorizontalLine();
         tasks.addTask(todo);
-        tasks.printAdd(todo);
-        ui.printHorizontalLine();
-
         storage.save(tasks);
+
+        return tasks.printAdd(todo);
+
     }
 }

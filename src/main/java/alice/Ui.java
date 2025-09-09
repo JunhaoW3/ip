@@ -18,28 +18,27 @@ public class Ui {
     /**
      * Prints the horizontal line that separates user input from bot output
      */
-    public void printHorizontalLine() {
+    public static String printHorizontalLine() {
+        String horizontalLine = "-";
         for (int i = 0; i < 30; i++) {
-            System.out.print("-");
+            horizontalLine = horizontalLine.concat("-");
         }
-        System.out.println("-");
+        return horizontalLine;
     }
 
     /**
      * Prints the greeting at the start of the program
      */
-    public void greet() {
-        printHorizontalLine();
-        System.out.println("Hello! I'm " + getBotName());
-        System.out.println("What can I do for you?");
-        printHorizontalLine();
+    public String greet() {
+        String greeting = String.format("%s\nHello! I'm %s, What can I do for you?\n%s",
+                printHorizontalLine(), getBotName(), printHorizontalLine());
+        return greeting;
     }
 
     /**
      * Prints the farewell at the end of the program
      */
-    public void exit() {
-        System.out.println("Bye. Hope to see you again soon!");
-        printHorizontalLine();
+    public String exit() {
+        return String.format("Bye. Hope to see you again soon!\n%s", printHorizontalLine());
     }
 }

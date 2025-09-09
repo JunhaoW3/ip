@@ -6,10 +6,9 @@ import alice.Ui;
 
 public class ExitCommand extends Command {
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         storage.save(tasks);
-        ui.printHorizontalLine();
-        ui.exit();
+        return "Bye. Hope to see you again soon!";
     }
 
     @Override

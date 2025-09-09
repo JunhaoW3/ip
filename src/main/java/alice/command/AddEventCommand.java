@@ -15,7 +15,7 @@ public class AddEventCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws AliceException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws AliceException {
         String[] arr = input.split("/");
         String description = arr[0];
 
@@ -27,11 +27,10 @@ public class AddEventCommand extends Command {
         //String at = start + "-" + end;
         Task event = new Event(description, start, end);
 
-        ui.printHorizontalLine();
         tasks.addTask(event);
-        tasks.printAdd(event);
-        ui.printHorizontalLine();
-
         storage.save(tasks);
+
+        return tasks.printAdd(event);
+
     }
 }

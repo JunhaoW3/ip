@@ -10,6 +10,7 @@ public class Alice {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private boolean shouldExit = false;
 
     public Alice(String filePath) {
         ui = new Ui();
@@ -17,11 +18,26 @@ public class Alice {
         tasks = storage.load();
     }
 
+    public boolean shouldExit() {
+        return shouldExit;
+    }
+
     /**
      * Generates a response for the user's chat message.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            Command c = Parser.parse(input);
+            String response = c.execute(tasks, ui, storage);
+
+            if (c.isExit()) {
+                shouldExit = true;
+            }
+
+            return response;
+        } catch (AliceException e) {
+            return e.getMessage();
+        }
     }
 
     /**
@@ -42,9 +58,9 @@ public class Alice {
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (AliceException e) {
-                ui.printHorizontalLine();
+                Ui.printHorizontalLine();
                 System.out.println(e.getMessage());
-                ui.printHorizontalLine();
+                Ui.printHorizontalLine();
             }
         }
     }

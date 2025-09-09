@@ -15,7 +15,7 @@ public class AddDeadlineCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws AliceException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws AliceException {
         String lowerCase = input.toLowerCase();
         String[] arr = input.split("/");
         String description = arr[0];
@@ -26,11 +26,10 @@ public class AddDeadlineCommand extends Command {
         String by = String.format("%s/%s/%s", arr[1].substring(3), arr[2], arr[3].trim());
         Task deadline = new Deadline(description, by);
 
-        ui.printHorizontalLine();
         tasks.addTask(deadline);
-        tasks.printAdd(deadline);
-        ui.printHorizontalLine();
-
         storage.save(tasks);
+
+        return tasks.printAdd(deadline);
+
     }
 }

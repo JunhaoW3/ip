@@ -13,10 +13,8 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws AliceException {
-        ui.printHorizontalLine();
-        tasks.deleteTask(input);
-        ui.printHorizontalLine();
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws AliceException {
+        return tasks.deleteTask(input);
     }
 
 }

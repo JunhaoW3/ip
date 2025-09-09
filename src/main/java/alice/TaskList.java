@@ -58,12 +58,13 @@ public class TaskList {
     /**
      * Prints out the tasks in the list
      */
-    public void getList() {
-        System.out.println("Here are the tasks in your list:");
+    public String getList() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
-            String item = String.format("%d. %s", i + 1, tasks.get(i).toString());
-            System.out.println(item);
+            sb.append(String.format("%d. %s\n", i + 1, tasks.get(i)));
         }
+        return sb.toString();
     }
 
     /**
@@ -98,11 +99,9 @@ public class TaskList {
      *
      * @param task Task to be added to the list
      */
-    public void printAdd(Task task) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task.toString());
-        String numberOfTasks = String.format("Now you have %d tasks in the list", tasks.size());
-        System.out.println(numberOfTasks);
+    public String printAdd(Task task) {
+        return String.format("%s\nGot it. I've added this task:\n%s\nNow you have %d tasks in the list\n%s",
+                Ui.printHorizontalLine(), task, tasks.size(), Ui.printHorizontalLine());
     }
 
     /**
@@ -111,29 +110,30 @@ public class TaskList {
      * @param text Text of task to be deleted
      * @throws AliceException If there is no matching task
      */
-    public void deleteTask(String text) throws AliceException {
+    public String deleteTask(String text) throws AliceException {
         int taskNumber = getTaskNumber(text);
         Task task = tasks.get(taskNumber);
         tasks.remove(taskNumber);
 
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(task.toString());
-        String tasksLeft = String.format("Now you have %s tasks in the list.", tasks.size());
-        System.out.println(tasksLeft);
+        return String.format("%s\nNoted. I've removed this task:\n%s\nNow you have %s tasks in the list.\n%s",
+                Ui.printHorizontalLine(), task, tasks.size(), Ui.printHorizontalLine());
     }
 
-    public void findTask(String text) {
+    public String findTask(String text) {
         int count = 0;
         String[] words = text.split(" ");
         String keyword = words[1];
-        System.out.println("Here are the matching tasks in your list:");
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("%s\n", Ui.printHorizontalLine()));
+        sb.append("Here are the matching tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
             String taskString = tasks.get(i).toString();
             if (taskString.contains(keyword)) {
-                String item = String.format("%d. %s", count + 1, taskString);
-                System.out.println(item);
+                sb.append(String.format("%d. %s\n", count + 1, taskString));
                 count++;
             }
         }
+        sb.append(String.format("%s\n", Ui.printHorizontalLine()));
+        return sb.toString();
     }
 }
