@@ -1,7 +1,5 @@
 package alice;
 
-import alice.command.Command;
-import alice.exceptions.AliceException;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
