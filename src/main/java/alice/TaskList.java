@@ -41,14 +41,6 @@ public class TaskList {
 
     /**
      *
-     * @return Size of the list
-     */
-    public int getSize() {
-        return tasks.size();
-    }
-
-    /**
-     *
      * @return list of all the tasks
      */
     public ArrayList<Task> getAllTasks() {
