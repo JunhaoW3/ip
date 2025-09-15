@@ -83,6 +83,7 @@ public class Storage {
 
         switch (type) {
             case "T":
+                assert description != null && !description.isEmpty() : "Todo description cannot be empty";
                 return new Todo(description, isDone);
             case "D":
                 return new Deadline(description, isDone, parts[3]);
