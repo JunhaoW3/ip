@@ -30,6 +30,7 @@ public class Ui {
      * Prints the greeting at the start of the program
      */
     public String greet() {
+        assert getBotName() != null : "Bot name must not be null";
         String greeting = String.format("%s\nHello! I'm %s, What can I do for you?\n%s",
                 printHorizontalLine(), getBotName(), printHorizontalLine());
         return greeting;
