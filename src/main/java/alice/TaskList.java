@@ -42,14 +42,6 @@ public class TaskList {
 
     /**
      *
-     * @return Size of the list
-     */
-    public int getSize() {
-        return tasks.size();
-    }
-
-    /**
-     *
      * @return list of all the tasks
      */
     public ArrayList<Task> getAllTasks() {
@@ -120,6 +112,11 @@ public class TaskList {
                 Ui.printHorizontalLine(), task, tasks.size(), Ui.printHorizontalLine());
     }
 
+    /**
+     *
+     * @param text Text that you intend to find
+     * @return List of tasks that matches the text
+     */
     public String findTask(String text) {
         int count = 0;
         String[] words = text.split(" ");
