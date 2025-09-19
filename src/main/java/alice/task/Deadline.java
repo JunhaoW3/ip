@@ -26,6 +26,10 @@ public class Deadline extends Task {
         return this.by;
     }
 
+    public void setBy(String by) {
+        this.by = LocalDateTime.parse(by.trim(), INPUT_FORMAT);
+    }
+
     @Override
     public String toFileFormat() {
         return "D | " + getStatusIcon() + " | " + description + " | " + by.format(INPUT_FORMAT);
