@@ -40,6 +40,8 @@ public class Parser {
             return new DeleteCommand(fullCommand);
         } else if (lower.startsWith("find")) {
             return new FindCommand(fullCommand);
+        } else if (lower.startsWith("edit")) {
+            return new EditCommand(fullCommand);
         } else if (lower.equals("bye")) {
             return new ExitCommand();
         } else {

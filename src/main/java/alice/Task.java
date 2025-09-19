@@ -33,6 +33,10 @@ public class Task {
         return (isDone ? "X" : " ");
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     /**
      * Marks the task as done
      */

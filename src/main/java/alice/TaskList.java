@@ -2,6 +2,8 @@ package alice;
 
 import alice.exceptions.AliceException;
 import alice.exceptions.InvalidTaskNumberException;
+import alice.task.Deadline;
+import alice.task.Event;
 
 import java.util.ArrayList;
 
@@ -133,5 +135,26 @@ public class TaskList {
         }
         sb.append(String.format("%s\n", Ui.printHorizontalLine()));
         return sb.toString();
+    }
+
+    public void editTask(int index, String newDescription, String... newTimes) {
+        assert index >= 0 && index < tasks.size() : "Index out of bounds for edit";
+
+        Task task = tasks.get(index);
+
+        task.setDescription(newDescription);
+
+        if (task instanceof Deadline) {
+            if (newTimes.length < 1) {
+                throw new IllegalArgumentException("Deadline edit requires new /by datetime");
+            }
+            ((Deadline) task).setBy(newTimes[0]);
+        } else if (task instanceof Event) {
+            if (newTimes.length < 2) {
+                throw new IllegalArgumentException("Event edit requires new /from and /to datetime");
+            }
+            ((Event) task).setStart(newTimes[0]);
+            ((Event) task).setEnd(newTimes[1]);
+        }
     }
 }

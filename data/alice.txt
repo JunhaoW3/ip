@@ -1,4 +1,4 @@
-T | X | todo homework
+T |   | job
 D |   | deadline return book  | 2/10/2018 1800
 T |   | todo sports
 D |   | deadline project meeting  | 2/12/2019 1800

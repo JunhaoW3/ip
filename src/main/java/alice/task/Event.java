@@ -2,6 +2,7 @@ package alice.task;
 
 import alice.Task;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -22,6 +23,14 @@ public class Event extends Task {
     public Event(String description, boolean isDone, String start, String end) {
         super(description, isDone);
         this.start = LocalDateTime.parse(start.trim(), INPUT_FORMAT);
+        this.end = LocalDateTime.parse(end.trim(), INPUT_FORMAT);
+    }
+
+    public void setStart(String start) {
+        this.start = LocalDateTime.parse(start.trim(), INPUT_FORMAT);
+    }
+
+    public void setEnd(String end) {
         this.end = LocalDateTime.parse(end.trim(), INPUT_FORMAT);
     }
 
