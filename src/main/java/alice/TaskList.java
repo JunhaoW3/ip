@@ -4,6 +4,7 @@ import alice.exceptions.AliceException;
 import alice.exceptions.InvalidTaskNumberException;
 import alice.task.Deadline;
 import alice.task.Event;
+import alice.task.Todo;
 
 import java.util.ArrayList;
 
@@ -137,24 +138,47 @@ public class TaskList {
         return sb.toString();
     }
 
-    public void editTask(int index, String newDescription, String... newTimes) {
-        assert index >= 0 && index < tasks.size() : "Index out of bounds for edit";
+    public String editTask(String text) throws AliceException {
+        try {
 
-        Task task = tasks.get(index);
-
-        task.setDescription(newDescription);
-
-        if (task instanceof Deadline) {
-            if (newTimes.length < 1) {
-                throw new IllegalArgumentException("Deadline edit requires new /by datetime");
+            String[] split = text.trim().split(" ", 3);
+            if (split.length < 3) {
+                throw new AliceException("Edit format: edit <task_number> <new details>");
             }
-            ((Deadline) task).setBy(newTimes[0]);
-        } else if (task instanceof Event) {
-            if (newTimes.length < 2) {
-                throw new IllegalArgumentException("Event edit requires new /from and /to datetime");
+
+            int taskIndex = Integer.parseInt(split[1]) - 1;
+            Task task = tasks.get(taskIndex);
+
+            String details = split[2].trim();
+
+            if (task instanceof Todo) {
+                task.setDescription(details);
+
+            } else if (task instanceof Deadline) {
+                String[] parts = details.split(" /by ", 2);
+                if (parts.length < 2) {
+                    throw new AliceException("Deadline edit format: edit <num> <desc> /by <dd/MM/yyyy HHmm>");
+                }
+                task.setDescription(parts[0].trim());
+                ((Deadline) task).setBy(parts[1].trim());
+
+            } else if (task instanceof Event) {
+                String[] parts = details.split(" /from | /to ", 3);
+                if (parts.length < 3) {
+                    throw new AliceException("Event edit format: " +
+                            "edit <num> <desc> /from dd/MM/yyyy HHmm /to dd/MM/yyyy HHmm");
+                }
+                task.setDescription(parts[0].trim());
+                ((Event) task).setStart(parts[1].trim());
+                ((Event) task).setEnd(parts[2].trim());
             }
-            ((Event) task).setStart(newTimes[0]);
-            ((Event) task).setEnd(newTimes[1]);
+
+            return "Got it. I've updated this task:\n  " + task;
+
+        } catch (IndexOutOfBoundsException e) {
+            throw new AliceException("Task number not found.");
+        } catch (NumberFormatException e) {
+            throw new AliceException("Invalid task number.");
         }
     }
 }
