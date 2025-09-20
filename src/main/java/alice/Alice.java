@@ -58,9 +58,7 @@ public class Alice {
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (AliceException e) {
-                Ui.printHorizontalLine();
                 System.out.println(e.getMessage());
-                Ui.printHorizontalLine();
             }
         }
     }

@@ -96,8 +96,8 @@ public class TaskList {
      * @param task Task to be added to the list
      */
     public String printAdd(Task task) {
-        return String.format("%s\nGot it. I've added this task:\n%s\nNow you have %d tasks in the list\n%s",
-                Ui.printHorizontalLine(), task, tasks.size(), Ui.printHorizontalLine());
+        return String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list",
+                task, tasks.size());
     }
 
     /**
@@ -111,8 +111,8 @@ public class TaskList {
         Task task = tasks.get(taskNumber);
         tasks.remove(taskNumber);
 
-        return String.format("%s\nNoted. I've removed this task:\n%s\nNow you have %s tasks in the list.\n%s",
-                Ui.printHorizontalLine(), task, tasks.size(), Ui.printHorizontalLine());
+        return String.format("Noted. I've removed this task:\n%s\nNow you have %s tasks in the list.",
+                task, tasks.size());
     }
 
     /**
@@ -125,7 +125,6 @@ public class TaskList {
         String[] words = text.split(" ");
         String keyword = words[1];
         StringBuilder sb = new StringBuilder();
-        sb.append(String.format("%s\n", Ui.printHorizontalLine()));
         sb.append("Here are the matching tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
             String taskString = tasks.get(i).toString();
@@ -134,7 +133,6 @@ public class TaskList {
                 count++;
             }
         }
-        sb.append(String.format("%s\n", Ui.printHorizontalLine()));
         return sb.toString();
     }
 

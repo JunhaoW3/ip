@@ -15,15 +15,10 @@ public class Ui {
         return BOT_NAME;
     }
 
-    /**
-     * Prints the horizontal line that separates user input from bot output
-     */
-    public static String printHorizontalLine() {
-        String horizontalLine = "-";
-        for (int i = 0; i < 30; i++) {
-            horizontalLine = horizontalLine.concat("-");
-        }
-        return horizontalLine;
+    public void showMessage(String message) {
+        System.out.println("________________________________");
+        System.out.println(message);
+        System.out.println("________________________________");
     }
 
     /**
@@ -31,8 +26,7 @@ public class Ui {
      */
     public String greet() {
         assert getBotName() != null : "Bot name must not be null";
-        String greeting = String.format("%s\nHello! I'm %s, What can I do for you?\n%s",
-                printHorizontalLine(), getBotName(), printHorizontalLine());
+        String greeting = String.format("Hello! I'm %s, What can I do for you?", getBotName());
         return greeting;
     }
 
@@ -40,6 +34,6 @@ public class Ui {
      * Prints the farewell at the end of the program
      */
     public String exit() {
-        return String.format("Bye. Hope to see you again soon!\n%s", printHorizontalLine());
+        return String.format("Bye. Hope to see you again soon!");
     }
 }

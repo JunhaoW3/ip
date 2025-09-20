@@ -43,8 +43,7 @@ public class Task {
     public String markDone() {
         this.isDone = true;
         String description = this.getDescription().stripTrailing();
-        return String.format("%s\nNice! I've marked this task as done:\n[X] %s\n%s",
-                Ui.printHorizontalLine(), description, Ui.printHorizontalLine());
+        return String.format("Nice! I've marked this task as done:\n[X] %s", description);
     }
 
     /**
@@ -53,8 +52,7 @@ public class Task {
     public String markUndone() {
         this.isDone = false;
         String description = this.getDescription().stripTrailing();
-        return String.format("%s\nOK, I've marked this task as not done yet:\n[ ] %s\n%s",
-                Ui.printHorizontalLine(), description, Ui.printHorizontalLine());
+        return String.format("OK, I've marked this task as not done yet:\n[ ] %s", description);
     }
 
     /**
