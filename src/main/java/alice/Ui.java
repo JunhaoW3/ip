@@ -24,10 +24,10 @@ public class Ui {
     /**
      * Prints the greeting at the start of the program
      */
-    public String greet() {
+    public void greet() {
         assert getBotName() != null : "Bot name must not be null";
-        String greeting = String.format("Hello! I'm %s, What can I do for you?", getBotName());
-        return greeting;
+        String greeting = String.format("Hello! I'm %s,\nWhat can I do for you?", getBotName());
+        showMessage(greeting);
     }
 
     /**

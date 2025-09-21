@@ -1,3 +1,3 @@
 T |   | job
-D |   | deadline return book  | 2/10/2018 1800
-T | X | todo sports
+D | X | deadline return book  | 2/10/2018 1800
+T |   | todo sports

@@ -3,7 +3,7 @@ package alice;
 /**
  * Represents the tasks that the user can add to list
  */
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -34,7 +34,7 @@ public class Task {
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.description = description.trim();
     }
 
     /**
@@ -59,9 +59,7 @@ public class Task {
      *
      * @return String in the format to be written to the file
      */
-    public String toFileFormat() {
-        return (isDone ? "X" : " ") + " | " + description;
-    }
+    public abstract String toFileFormat();
 
     /**
      *

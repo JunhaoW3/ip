@@ -30,7 +30,7 @@ public class MainWindow extends AnchorPane {
     private Ui ui;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaAlice.png"));
+    private Image aliceImage = new Image(this.getClass().getResourceAsStream("/images/DaAlice.png"));
 
     @FXML
     public void initialize() {
@@ -40,6 +40,9 @@ public class MainWindow extends AnchorPane {
     /** Injects the Alice instance */
     public void setAlice(Alice a) {
         alice = a;
+
+        String greeting = "Hello! I'm Alice.\nWhat can I do for you?";
+        dialogContainer.getChildren().add(DialogBox.getAliceDialog(greeting, aliceImage));
     }
 
     /**
@@ -52,7 +55,7 @@ public class MainWindow extends AnchorPane {
         String response = alice.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getAliceDialog(response, aliceImage)
         );
         userInput.clear();
 
