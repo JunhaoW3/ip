@@ -23,7 +23,10 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+            scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
             stage.setScene(scene);
+            stage.setTitle("Alice");
+            stage.setResizable(true);
             fxmlLoader.<MainWindow>getController().setAlice(new Alice("data/alice.txt"));
             stage.show();
         } catch (IOException e) {

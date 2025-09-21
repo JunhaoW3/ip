@@ -53,10 +53,20 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = alice.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getAliceDialog(response, aliceImage)
-        );
+
+        // Choose dialog style based on whether it's error
+        if (response.startsWith("Error:") || response.contains("Exception")) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getErrorDialog(response, aliceImage)
+            );
+        } else {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getAliceDialog(response, aliceImage)
+            );
+        }
+
         userInput.clear();
 
         if (alice.shouldExit()) {
