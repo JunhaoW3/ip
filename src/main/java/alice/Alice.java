@@ -55,12 +55,11 @@ public class Alice {
             try {
                 String fullCommand = scanner.nextLine();
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                String output = c.execute(tasks, ui, storage);
+                ui.showMessage(output);
                 isExit = c.isExit();
             } catch (AliceException e) {
-                Ui.printHorizontalLine();
-                System.out.println(e.getMessage());
-                Ui.printHorizontalLine();
+                ui.showMessage(e.getMessage());
             }
         }
     }

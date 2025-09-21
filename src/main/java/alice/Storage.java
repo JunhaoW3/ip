@@ -1,5 +1,6 @@
 package alice;
 
+import alice.exceptions.AliceException;
 import alice.task.Deadline;
 import alice.task.Event;
 import alice.task.Todo;
@@ -75,7 +76,7 @@ public class Storage {
      * @param line Line input from the user
      * @return Task type
      */
-    private Task parseTask(String line) {
+    private Task parseTask(String line) throws AliceException {
         String[] parts = line.split(" \\| ");
         String type = parts[0];
         boolean isDone = parts[1].equals("X");

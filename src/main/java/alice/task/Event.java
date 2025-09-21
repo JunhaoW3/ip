@@ -1,46 +1,45 @@
 package alice.task;
 
+import alice.Alice;
 import alice.Task;
+import alice.exceptions.AliceException;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
-public class Event extends Task {
+public class Event extends DateTask {
 
     private LocalDateTime start;
     private LocalDateTime end;
 
-    private static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-    private static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy, h:mma");
-
-    public Event(String description, String start, String end) {
+    public Event(String description, String start, String end) throws AliceException {
         super(description);
-        this.start = LocalDateTime.parse(start.trim(), INPUT_FORMAT);
-        this.end = LocalDateTime.parse(end.trim(), INPUT_FORMAT);
+        this.start = parseDate(start);
+        this.end = parseDate(end);
     }
 
-    public Event(String description, boolean isDone, String start, String end) {
+    public Event(String description, boolean isDone, String start, String end) throws AliceException {
         super(description, isDone);
-        this.start = LocalDateTime.parse(start.trim(), INPUT_FORMAT);
-        this.end = LocalDateTime.parse(end.trim(), INPUT_FORMAT);
+        this.start = parseDate(start);
+        this.end = parseDate(end);
     }
 
-    public void setStart(String start) {
-        this.start = LocalDateTime.parse(start.trim(), INPUT_FORMAT);
+    public void setStart(String start) throws AliceException {
+        this.start = parseDate(start);
     }
 
-    public void setEnd(String end) {
-        this.end = LocalDateTime.parse(end.trim(), INPUT_FORMAT);
+    public void setEnd(String end) throws AliceException {
+        this.end = parseDate(end);
     }
 
     @Override
     public String toFileFormat() {
-        return "E | " + getStatusIcon() + " | " + description + " | " + start.format(INPUT_FORMAT) + " | " + end.format(INPUT_FORMAT);
+        return "E | " + getStatusIcon() + " | " + description + " | " +
+                start.format(INPUT_FORMAT) + " | " + end.format(INPUT_FORMAT);
     }
 
     @Override
     public String toString() {
-        return "[E][" + (isDone ? "X" : " ") + "] " + description + " (from: " + start.format(OUTPUT_FORMAT) + " to: " + end.format(OUTPUT_FORMAT) + ")";
+        return "[E][" + (isDone ? "X" : " ") + "] " + description +
+                " (from: " + start.format(OUTPUT_FORMAT) + " to: " + end.format(OUTPUT_FORMAT) + ")";
     }
 }

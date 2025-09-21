@@ -1,33 +1,27 @@
 package alice.task;
 
 import alice.Task;
+import alice.exceptions.AliceException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task {
+public class Deadline extends DateTask {
 
     private LocalDateTime by;
 
-    private static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-    private static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy, h:mma");
-
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws AliceException {
         super(description);
-        this.by = LocalDateTime.parse(by.trim(), INPUT_FORMAT);
+        this.by = parseDate(by);
     }
 
-    public Deadline(String description, boolean isDone, String by) {
+    public Deadline(String description, boolean isDone, String by) throws AliceException {
         super(description, isDone);
-        this.by = LocalDateTime.parse(by.trim(), INPUT_FORMAT);
+        this.by = parseDate(by);
     }
 
-    public LocalDateTime getByDate() {
-        return this.by;
-    }
-
-    public void setBy(String by) {
-        this.by = LocalDateTime.parse(by.trim(), INPUT_FORMAT);
+    public void setBy(String by) throws AliceException {
+        this.by = parseDate(by);
     }
 
     @Override
