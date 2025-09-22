@@ -1,10 +1,11 @@
 package alice.task;
 
 import alice.Task;
-import alice.exceptions.AliceException;
+import alice.exceptions.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Deadline extends DateTask {
 
@@ -17,7 +18,11 @@ public class Deadline extends DateTask {
 
     public Deadline(String description, boolean isDone, String by) throws AliceException {
         super(description, isDone);
-        this.by = parseDate(by);
+        try {
+            this.by = LocalDateTime.parse(by.trim(), INPUT_FORMAT);
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateFormatException("Please use format: dd/MM/yyyy HHmm (e.g., 2/12/2019 1800)");
+        }
     }
 
     public void setBy(String by) throws AliceException {
